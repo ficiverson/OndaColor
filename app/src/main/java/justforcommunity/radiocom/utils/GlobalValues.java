@@ -42,7 +42,7 @@ public class GlobalValues {
     public static String twitter = "https://twitter.com/";
     public static String twitterName = "ondacolor";
     public static String facebookName = "https://www.facebook.com/ondacolormlg";
-    public static String facebookId = "172399249440065"; //ondacolor
+    public static String facebookId = "172399249440065";
     //end configuration you can update
 
     //things that you may not cange

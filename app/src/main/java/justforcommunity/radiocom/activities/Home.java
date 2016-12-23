@@ -26,6 +26,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
@@ -40,9 +41,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
@@ -69,6 +76,7 @@ public class Home extends AppCompatActivity
     private SharedPreferences.Editor edit;
     private static final int REQUEST_WRITE_STORAGE = 112;
     private FloatingActionButton fab_media;
+    private TextView detail_phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +111,30 @@ public class Home extends AppCompatActivity
             }
         });
 
+        //set phone clickable
+        View headerLayout = navigationView.getHeaderView(0);
+        detail_phone = (TextView) headerLayout.findViewById(R.id.detail_phone);
+        String myString = getString(R.string.station_name);
+        int i1 = myString.indexOf("[");
+        int i2 = myString.indexOf("]");
+        detail_phone.setMovementMethod(LinkMovementMethod.getInstance());
+        detail_phone.setText(myString, TextView.BufferType.SPANNABLE);
+        Spannable spannable = (Spannable) detail_phone.getText();
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + getString(R.string.station_phone)));
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(mContext, mContext.getResources().getString(R.string.station_phone_notgranted), Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        spannable.setSpan(clickableSpan, i1, i2 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(new ForegroundColorSpan(Color.WHITE), 0,myString.length(), 0);
+        //end spannable
+
         if (prefs.getBoolean("isMediaPlaying", false)) {//playing is on so we neeed to put menu correctly
             navigationView.getMenu().getItem(2).setTitle(getResources().getString(R.string.drawer_item_streaming_stop));
             navigationView.getMenu().getItem(2).setIcon(R.drawable.streamingstop);
@@ -119,8 +151,8 @@ public class Home extends AppCompatActivity
             station = gson.fromJson(prefs.getString("jsonStation", ""), StationDTO.class);
         }
 
-        //Load the station fragment
-        loadStation();
+        //loadNews
+        loadNews();
 
         boolean hasPermissionChange = (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);

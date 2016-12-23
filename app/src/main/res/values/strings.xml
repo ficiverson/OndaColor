@@ -21,7 +21,9 @@
 <resources>
     <string name="app_name">ONDA COLOR</string>
     
-    <string name="station_name">ONDA COLOR - Telf. 952611567</string>
+    <string name="station_name">ONDA COLOR - &#9742; [952611567]</string>
+    <string name="station_phone">952611567</string>
+    <string name="station_phone_notgranted">Debes dar permiso a la app para hacer llamadas.</string>
     <string name="contact_mail">participacion@ondacolor.org</string>
 
     <string name="gallery">Galería de fotos</string>
