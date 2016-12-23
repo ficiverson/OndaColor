@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "915240736962",
+    "project_id": "firebase-onda-color"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915240736962:android:d5b5b2c36860fe07",
+        "android_client_info": {
+          "package_name": "justforcommunity.radiocom.ondacolor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwMb8XiNAZi0dOXWWavXfYrGm5w0S5r2w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-86927262-2"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
