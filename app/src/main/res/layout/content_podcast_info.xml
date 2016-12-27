@@ -36,13 +36,13 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="520dp"
             android:src="@drawable/bk_nav_header"
             android:scaleType="centerCrop"
             />
         <View
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="520dp"
             android:background="@color/colorPrimaryDark85"
             />
 
